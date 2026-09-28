@@ -1,0 +1,20 @@
+[project]
+name = "llm-wiki"
+version = "0.1.0"
+description = "LLM-maintained macro research wiki. See AGENTS.md and doc/contract.md."
+requires-python = ">=3.12"
+dependencies = [
+    "pyyaml>=6.0",
+    "mkdocs-material>=9.5",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv]
+package = false

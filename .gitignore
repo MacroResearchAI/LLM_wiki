@@ -1,0 +1,16 @@
+# Build output
+site/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Temporary scripts (user rule: scripts/temporary/ is scratch space)
+scripts/temporary/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
