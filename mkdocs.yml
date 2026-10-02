@@ -1,0 +1,13 @@
+site_name: LLM Wiki
+docs_dir: wiki
+site_dir: site
+strict: true
+
+theme:
+  name: material
+
+plugins:
+  - search
+
+exclude_docs: |
+  *.json
