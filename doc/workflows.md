@@ -14,11 +14,11 @@ Governing documents:
 | `wiki/index.md` | Generated catalogue of all pages. The LLM reads it first to navigate; never edited by hand. |
 | `wiki/log.md` | Append-only chronological record of ingests, queries, lint passes. |
 | `scripts/wiki/build_index.py` | Regenerates `wiki/index.md` from page frontmatter. `--check` verifies without writing. |
-| `scripts/wiki/lint.py` | Deterministic structural checks. Exit code non-zero on any finding. |
+| `scripts/wiki/lint.py` | Deterministic structural checks. Exit code 1 when any finding is an error. Warnings alone leave the exit code at 0. |
 | `.github/workflows/lint.yml` | Runs `lint.py` and `build_index.py --check` on every pull request. |
 | `.github/workflows/pages.yml` | Builds and deploys the MkDocs site when `main` changes. |
 
-Local wrapper: `./run.ps1 <index|lint|serve>` (or `./run.sh` on Unix).
+Local wrapper: `./run.ps1 <index|lint|serve|test>` (or `./run.sh` on Unix).
 
 ---
 
@@ -65,7 +65,7 @@ Applies to any new material: paper, report, speech, data file, or your own writt
 | # | Who | Governed by | Step |
 |---|---|---|---|
 | 15 | Script (run by LLM) | `build_index.py` | `./run.ps1 index` regenerates `wiki/index.md` from frontmatter. |
-| 16 | Script (run by LLM) | `lint.py` | `./run.ps1 lint` checks broken links, orphan pages, missing or invalid frontmatter, pending raw sources, stale index, log entry format, duplicate slugs. LLM fixes findings and re-runs until clean. |
+| 16 | Script (run by LLM) | `lint.py` | `./run.ps1 lint` checks broken links, orphan pages, missing or invalid frontmatter, pending raw sources, stale index, log entry format, duplicate slugs. LLM fixes findings and re-runs until lint reports no errors. Warnings do not fail the command. |
 | 17 | LLM | `SKILL.md` | Report changed files, lint result, and a proposed commit message. Wait. |
 
 ### Phase F. Human reviews and ships
@@ -109,7 +109,7 @@ Two layers. The script catches what is mechanically checkable; the LLM catches w
 | 4 | LLM | `SKILL.md` | Present findings grouped as: fix now (mechanical), propose (needs judgement), investigate (new sources or questions). Wait. |
 | 5 | Human | – | Approve the fix list; answer judgement calls; add investigation items to your own backlog. |
 | 6 | LLM | `AGENTS.md` | Apply approved fixes. Append `## [yyyy-mm-dd] lint | <n> findings, <m> fixed` to `wiki/log.md` with bullets. |
-| 7 | Script (run by LLM) | `build_index.py`, `lint.py` | `./run.ps1 index` then `./run.ps1 lint` until clean. |
+| 7 | Script (run by LLM) | `build_index.py`, `lint.py` | `./run.ps1 index` then `./run.ps1 lint` until lint reports no errors. Warnings do not fail the command. |
 | 8 | Human | user git rule | Review, approve git operations, PR, CI, merge. |
 
 ---
