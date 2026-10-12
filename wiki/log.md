@@ -15,3 +15,8 @@
 - created entities/guillermo-calvo.md, entities/leonardo-leiderman.md, entities/carmen-reinhart.md, entities/international-monetary-fund.md
 - created concepts/real-exchange-rate.md, concepts/sterilized-intervention.md, topics/latin-american-capital-inflows.md
 - contradictions: none
+
+## [2026-10-12] query | What factors affect capital flow?
+- filed analyses/2026-10-12-capital-flow-factors.md
+- consulted topics/latin-american-capital-inflows.md, sources/1993-03-01-calvo-capital-inflows.md, concepts/sterilized-intervention.md, concepts/real-exchange-rate.md
+- gap: no general account of capital flows outside the 1990-91 Latin American episode
