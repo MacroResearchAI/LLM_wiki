@@ -9,3 +9,9 @@
 - filed analyses/2026-09-21-fed-vs-ecb-neutral-rate.md
 - consulted topics/us-monetary-policy-stance.md, concepts/neutral-rate.md
 - gap: no ECB source
+
+## [2026-10-12] ingest | Calvo, Leiderman, and Reinhart, capital inflows (1993)
+- created sources/1993-03-01-calvo-capital-inflows.md
+- created entities/guillermo-calvo.md, entities/leonardo-leiderman.md, entities/carmen-reinhart.md, entities/international-monetary-fund.md
+- created concepts/real-exchange-rate.md, concepts/sterilized-intervention.md, topics/latin-american-capital-inflows.md
+- contradictions: none

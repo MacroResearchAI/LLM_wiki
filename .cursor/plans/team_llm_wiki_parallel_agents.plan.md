@@ -23,6 +23,7 @@ todos:
   - id: pilot
     content: "Pilot: ingest 2-3 real macro sources, refine AGENTS.md"
     status: pending
+isProject: false
 ---
 
 # Team LLM Wiki - Parallel Agents
