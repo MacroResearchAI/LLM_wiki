@@ -32,4 +32,4 @@ The 1990–91 surge in capital inflows to Latin America, and the accompanying [r
 
 ## Related analyses
 
-None recorded.
+- [Factors affecting capital flows](../analyses/2026-10-12-capital-flow-factors.md)
