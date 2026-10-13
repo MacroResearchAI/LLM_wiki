@@ -9,5 +9,8 @@ theme:
 plugins:
   - search
 
+hooks:
+  - scripts/wiki/mkdocs_hooks.py
+
 exclude_docs: |
   *.json

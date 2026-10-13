@@ -22,3 +22,6 @@ jobs:
 
       - name: Check generated index
         run: ./run.sh index --check
+
+      - name: Build site
+        run: uv run mkdocs build --strict

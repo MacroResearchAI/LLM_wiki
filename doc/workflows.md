@@ -15,7 +15,8 @@ Governing documents:
 | `wiki/log.md` | Append-only chronological record of ingests, queries, lint passes. |
 | `scripts/wiki/build_index.py` | Regenerates `wiki/index.md` from page frontmatter. `--check` verifies without writing. |
 | `scripts/wiki/lint.py` | Deterministic structural checks. Exit code 1 when any finding is an error. Warnings alone leave the exit code at 0. |
-| `.github/workflows/lint.yml` | Runs `lint.py` and `build_index.py --check` on every pull request. |
+| `scripts/wiki/mkdocs_hooks.py` | MkDocs hooks that publish `raw/assets/` with the site so repo-relative image embeds resolve under `mkdocs build --strict`. |
+| `.github/workflows/lint.yml` | Runs `lint.py`, `build_index.py --check`, and `mkdocs build --strict` on every pull request. |
 | `.github/workflows/pages.yml` | Builds and deploys the MkDocs site when `main` changes. |
 
 Local wrapper: `./run.ps1 <index|lint|serve|test>` (or `./run.sh` on Unix).
