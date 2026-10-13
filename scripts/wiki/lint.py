@@ -237,8 +237,12 @@ class Linter:
                         problems.append(f"sources entry {entry!r} does not exist")
         if KEY_RAW in fm:
             raw = fm[KEY_RAW]
-            if not isinstance(raw, str) or not (self.root / raw).is_file():
-                problems.append(f"raw path {raw!r} does not exist")
+            entries = raw if isinstance(raw, list) else [raw]
+            if not entries:
+                problems.append("raw must be a path or a non-empty list of paths")
+            for entry in entries:
+                if not isinstance(entry, str) or not (self.root / entry).is_file():
+                    problems.append(f"raw path {entry!r} does not exist")
         if problems:
             self.error(page.rel, ROW_PATHS, "; ".join(problems))
 
@@ -360,8 +364,10 @@ class Linter:
         cited: set[Path] = set()
         for page in self.pages:
             raw = (page.frontmatter or {}).get(KEY_RAW)
-            if isinstance(raw, str):
-                cited.add((self.root / raw).resolve())
+            entries = raw if isinstance(raw, list) else [raw]
+            for entry in entries:
+                if isinstance(entry, str):
+                    cited.add((self.root / entry).resolve())
 
         referenced_assets: set[Path] = set()
         for _rel, path, text in self._link_sources():

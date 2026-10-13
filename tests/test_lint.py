@@ -160,6 +160,59 @@ def test_raw_key_on_non_source_is_a_key_error(copy_fixture) -> None:
     assert any(path == page and "key 'raw' is not permitted for type 'concept'" in msg for _, path, msg in findings)
 
 
+def test_raw_list_cites_every_entry(copy_fixture) -> None:
+    page = "wiki/sources/2026-09-20-powell-jackson-hole.md"
+
+    def mutate(root: Path) -> None:
+        scan = root / "raw" / "speeches" / "2026-09-20-powell-jackson-hole.pdf"
+        scan.write_bytes(b"%PDF-1.4 stub")
+        p = root / page
+        p.write_text(
+            p.read_text(encoding="utf-8").replace(
+                "raw: raw/speeches/2026-09-20-powell-jackson-hole.md",
+                "raw: [raw/speeches/2026-09-20-powell-jackson-hole.md, raw/speeches/2026-09-20-powell-jackson-hole.pdf]",
+            ),
+            encoding="utf-8",
+        )
+
+    code, findings = _lint_copy(copy_fixture, mutate)
+    assert code == 0, findings
+    assert findings == []
+
+
+def test_raw_list_with_missing_entry_is_an_error(copy_fixture) -> None:
+    page = "wiki/sources/2026-09-20-powell-jackson-hole.md"
+
+    def mutate(root: Path) -> None:
+        p = root / page
+        p.write_text(
+            p.read_text(encoding="utf-8").replace(
+                "raw: raw/speeches/2026-09-20-powell-jackson-hole.md",
+                "raw: [raw/speeches/2026-09-20-powell-jackson-hole.md, raw/speeches/missing.pdf]",
+            ),
+            encoding="utf-8",
+        )
+
+    code, findings = _lint_copy(copy_fixture, mutate)
+    assert code == 1
+    assert any(path == page and "raw path 'raw/speeches/missing.pdf' does not exist" in msg for _, path, msg in findings)
+
+
+def test_empty_raw_list_is_an_error(copy_fixture) -> None:
+    page = "wiki/sources/2026-09-20-powell-jackson-hole.md"
+
+    def mutate(root: Path) -> None:
+        p = root / page
+        p.write_text(
+            p.read_text(encoding="utf-8").replace("raw: raw/speeches/2026-09-20-powell-jackson-hole.md", "raw: []"),
+            encoding="utf-8",
+        )
+
+    code, findings = _lint_copy(copy_fixture, mutate)
+    assert code == 1
+    assert any(path == page and "raw must be a path or a non-empty list of paths" in msg for _, path, msg in findings)
+
+
 def test_log_entry_without_bullet_is_an_error(copy_fixture) -> None:
     def mutate(root: Path) -> None:
         p = root / "wiki" / "log.md"

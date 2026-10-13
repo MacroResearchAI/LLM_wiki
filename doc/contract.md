@@ -46,7 +46,7 @@ created: YYYY-MM-DD
 updated: YYYY-MM-DD                        # >= created
 tags: [kebab-case, kebab-case]             # may be []
 sources: [wiki/sources/<slug>.md]          # required for every type except source; must be non-empty; absent for source
-raw: raw/<category>/<file>                 # required for source only; absent otherwise
+raw: raw/<category>/<file>                 # required for source only; absent otherwise; a path or a non-empty list of paths
 ---
 ```
 
@@ -54,6 +54,7 @@ Rules:
 
 - Exactly one `type` value. No other keys are permitted; unknown keys are a lint `error`.
 - `sources` and `raw` are repo-root-relative paths and must exist on disk.
+- `raw` is a single path or a non-empty list of paths. The first entry is the primary file the source page describes; later entries are other forms of the same source, such as the scan a transcription was made from. Every entry must exist. Lint treats every listed file as cited.
 - `title` and `summary` are always double-quoted in YAML to avoid colon and quote parsing failures.
 - `tags` values match the slug regex.
 
@@ -448,7 +449,7 @@ Output, one finding per line on stdout:
 | `created` or `updated` not `YYYY-MM-DD`, or `updated < created` | pages | error |
 | `title` or `summary` empty, or `summary` > 200 characters | pages | error |
 | `tags` entry does not match slug regex | pages | error |
-| `sources:` entry or `raw:` path does not exist on disk | pages | error |
+| `sources:` entry or `raw:` entry does not exist on disk, or `raw:` is an empty list | pages | error |
 | Filename does not match slug regex or the C1 filename convention for its type | pages | error |
 | Duplicate slug (compare after lowercasing and removing `-` and `_`) across all pages | pages | error |
 | Broken relative body link (target file missing) | pages and special files | error |
@@ -457,7 +458,7 @@ Output, one finding per line on stdout:
 | `wiki/log.md` heading line violates the C4 regex, or an entry has no bullet | log | error |
 | `type: entity` (unclassified) | pages | warning |
 | Orphan page: no inbound body link from any page or from `overview.md` (links from `index.md` and `log.md` do not count) | pages | warning |
-| Pending raw source: file under `raw/` (excluding `raw/assets/`, `raw/README.md`, `.gitkeep`) not referenced by any `raw:` key | raw | warning |
+| Pending raw source: file under `raw/` (excluding `raw/assets/`, `raw/README.md`, `.gitkeep`) not listed in any `raw:` key | raw | warning |
 | Unreferenced asset: file under `raw/assets/` not linked from any page | raw | warning |
 
 Lint has no silent fallbacks. A file it cannot read or parse produces an `error`, never a skip.
@@ -486,3 +487,4 @@ then uploads and deploys `site/`.
 ## Amendment log
 
 - 2026-09-28: initial version (Phase 0).
+- 2026-10-13: `raw:` accepts a non-empty list of paths so a transcription and its original can be cited by one source page (C1, C7).
