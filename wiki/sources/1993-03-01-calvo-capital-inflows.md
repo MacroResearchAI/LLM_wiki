@@ -15,7 +15,7 @@ raw: ["raw/papers/2026-10-12 Calvo.md", "raw/papers/2026-10-12 Calvo.pdf"]
 - Authors: [Guillermo A. Calvo](../entities/guillermo-calvo.md), [Leonardo Leiderman](../entities/leonardo-leiderman.md), and [Carmen M. Reinhart](../entities/carmen-reinhart.md)
 - Venue: *IMF Staff Papers*, Vol. 40, No. 1 (March 1993), pp. 108–151, [International Monetary Fund](../entities/international-monetary-fund.md)
 - Date: 1993-03
-- Raw file: `raw/papers/2026-10-12 Calvo.md`, an OCR transcription made on 2026-10-13 from the scan `raw/papers/2026-10-12 Calvo.pdf`. The PDF has no text layer; check it when the transcription looks wrong.
+- Raw file: [`raw/papers/2026-10-12 Calvo.md`](https://github.com/MacroResearchAI/LLM_wiki/blob/main/raw/papers/2026-10-12%20Calvo.md), an OCR transcription made on 2026-10-13 from the scan [`raw/papers/2026-10-12 Calvo.pdf`](https://github.com/MacroResearchAI/LLM_wiki/blob/main/raw/papers/2026-10-12%20Calvo.pdf). The PDF has no text layer; check it when the transcription looks wrong.
 
 ## Key claims
 
