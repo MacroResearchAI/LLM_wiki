@@ -27,7 +27,7 @@ raw: raw/<category>/<file>
 ---
 ```
 
-Use exactly one allowed `type` value and no additional keys. `title` and `summary` are double-quoted; `summary` is one line and at most 200 characters. Dates use ISO `YYYY-MM-DD`, and `updated` must be on or after `created`. Tags use lowercase kebab-case slugs; an empty list is allowed. For `type: source`, include `raw:` and omit `sources:`. For every other type, include a non-empty `sources:` list of repository-root-relative source-page paths and omit `raw:`. Every declared path must exist.
+Use exactly one allowed `type` value and no additional keys. `title` and `summary` are double-quoted; `summary` is one line and at most 200 characters. Dates use ISO `YYYY-MM-DD`, and `updated` must be on or after `created`. Tags use lowercase kebab-case slugs; an empty list is allowed. For `type: source`, include `raw:` and omit `sources:`. `raw:` is one repository-root-relative path or a non-empty list of paths; the first entry is the primary file, and later entries are other forms of the same source, such as the scan a transcription was made from. For every other type, include a non-empty `sources:` list of repository-root-relative source-page paths and omit `raw:`. Every declared path must exist.
 
 | Directory | Allowed types | Index section |
 |---|---|---|

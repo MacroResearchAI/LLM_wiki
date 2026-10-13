@@ -20,3 +20,8 @@
 - filed analyses/2026-10-12-capital-flow-factors.md
 - consulted topics/latin-american-capital-inflows.md, sources/1993-03-01-calvo-capital-inflows.md, concepts/sterilized-intervention.md, concepts/real-exchange-rate.md
 - gap: no general account of capital flows outside the 1990-91 Latin American episode
+
+## [2026-10-13] lint | Cite the Calvo transcription and figures
+- schema: raw: accepts a non-empty list of paths (contract C1, C7; AGENTS.md; lint.py; tests)
+- updated sources/1993-03-01-calvo-capital-inflows.md to cite raw/papers/2026-10-12 Calvo.md and the PDF scan, and to embed the eleven figures from raw/assets/2026-10-12-calvo/
+- cleared pending-raw and unreferenced-asset warnings for the Calvo files
